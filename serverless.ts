@@ -1,16 +1,15 @@
 import { Serverless } from "serverless/aws";
 
+const stage = 'dev';
+
 const serverlessConfiguration: Serverless = {
   service: {
     name: "practice-work-rest-api",
     // app and org for use with dashboard.serverless.com
     // app: your-app-name,
     // org: your-org-name,
+    
   },
-
-  // includeModules:
-  //       forceExclude:   #excluding aws-sdk greatly reduces the bundle size
-  //         - aws-sdk
   frameworkVersion: ">=1.72.0",
   custom: {
     webpack: {
@@ -24,11 +23,13 @@ const serverlessConfiguration: Serverless = {
     name: "aws",
     runtime: "nodejs12.x",
     region: "eu-west-2",
+    stage:"dev",
     apiGateway: {
       minimumCompressionSize: 1024,
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",
+      test: stage,
       DYNAMODB_TABLE: "${self:service}-${opt:stage, self:provider.stage}",
     },
     iamRoleStatements: [
