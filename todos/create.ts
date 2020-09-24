@@ -12,9 +12,8 @@ export const create: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
-  const timestamp = new Date().getTime();
   const data = JSON.parse(event.body);
-  if (typeof data.text !== "string") {
+  if (typeof data.title !== "string") {
     console.log("Validation Failed");
     return generateResponse(400, "Validation Failed");
   }
@@ -23,10 +22,9 @@ export const create: APIGatewayProxyHandler = async (
     TableName: process.env.DYNAMODB_TABLE,
     Item: {
       id: uuid.v1(),
-      text: data.text,
-      checked: false,
-      createdAt: timestamp,
-      updatedAt: timestamp,
+      title: data.title,
+      complete: false,
+      dateAdded: new Date().toISOString(),
     },
   };
   let result;

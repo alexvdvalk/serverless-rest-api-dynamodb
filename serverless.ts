@@ -1,6 +1,6 @@
 import { Serverless } from "serverless/aws";
 
-const stage = 'dev';
+const stage = "dev";
 
 const serverlessConfiguration: Serverless = {
   service: {
@@ -8,7 +8,6 @@ const serverlessConfiguration: Serverless = {
     // app and org for use with dashboard.serverless.com
     // app: your-app-name,
     // org: your-org-name,
-    
   },
   frameworkVersion: ">=1.72.0",
   custom: {
@@ -23,7 +22,10 @@ const serverlessConfiguration: Serverless = {
     name: "aws",
     runtime: "nodejs12.x",
     region: "eu-west-2",
-    stage:"dev",
+    stage: "dev",
+    httpApi: {
+      cors: true,
+    },
     apiGateway: {
       minimumCompressionSize: 1024,
     },
