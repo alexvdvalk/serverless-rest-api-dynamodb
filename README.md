@@ -21,5 +21,5 @@ Endpoints:
 
 PUT Body:
 {
-"text": "required todo text"
+"title": "required todo text"
 }
